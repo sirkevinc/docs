@@ -1,50 +1,37 @@
-import React, { useState } from 'react'
-import { Editor } from 'slate-react'
-import { Value } from 'slate'
+import React from 'react';
+import SyncingEditor from './SyncingEditor';
 
-const initialValue = Value.fromJSON({
-  document: {
-    nodes: [
-      {
-        object: 'block',
-        type: 'paragraph',
-        nodes: [
-          {
-            object: 'text',
-            leaves: [
-              {
-                text: 'A line of text in a paragraph.',
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-})
+// import { Editor } from 'slate-react'
 
-// // Define our app...
-// class App extends React.Component {
-//   // Set the initial value when the app is first constructed.
-//   state = {
-//     value: initialValue,
-//   }
-
-//   // On change, update the app's React state with the new editor value.
-//   onChange = ({ value }) => {
-//     this.setState({ value })
-//   }
-
-//   // Render the editor.
-//   render() {
-//     return <Editor value={this.state.value} onChange={this.onChange} />
-//   }
-// }
+// const initialValue = Value.fromJSON({
+//   document: {
+//     nodes: [
+//       {
+//         object: 'block',
+//         type: 'paragraph',
+//         nodes: [
+//           {
+//             object: 'text',
+//             leaves: [
+//               {
+//                 text: 'A line of text in a paragraph.',
+//               },
+//             ],
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// })
 
 const App = () => {
-  const [value, setValue] = useState(initialValue);
-
-  return <Editor value={value} onChange={opts => setValue(opts.value)} />
+  return (
+    <div>
+      <SyncingEditor />
+      <br />
+      <SyncingEditor />
+    </div>
+  )
 }
 
 export default App;

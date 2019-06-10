@@ -68,6 +68,15 @@ const SyncingEditor = ({ groupId }) => {
       >
         Italic
       </button>
+      <button
+        onMouseDown={(e)=> {
+          e.preventDefault();
+          // underline selected text
+          editor.current.toggleMark('underline');
+        }}
+      >
+        Underline
+      </button>
     <Editor
       ref={editor}
       style={{
@@ -83,6 +92,8 @@ const SyncingEditor = ({ groupId }) => {
           }}>{props.children}</strong>
         } else if (props.mark.type === 'italic') {
           return <em>{props.children}</em>
+        } else if (props.mark.type === 'underline') {
+          return <u>{props.children}</u>
         }
 
         return next();

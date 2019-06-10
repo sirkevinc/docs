@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import SyncingEditor from './SyncingEditor';
 import GroupEditor from './GroupEditor';
 
 const App = () => {
@@ -14,11 +13,6 @@ const App = () => {
         }}
       />
       <Route path='/group/:id/' component={GroupEditor} />
-      <div>
-        <SyncingEditor />
-        <br />
-        <SyncingEditor />
-      </div>
     </BrowserRouter>
   )
 }

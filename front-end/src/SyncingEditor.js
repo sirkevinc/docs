@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import { initialValue } from './slateinitialValue';
+import Top from './Top';
 
 import io from 'socket.io-client';
 
@@ -47,6 +48,26 @@ const SyncingEditor = ({ groupId }) => {
   }, [])
 
   return (
+    <>
+    <Top />
+      <button
+        onMouseDown={(e)=> {
+          e.preventDefault();
+          // bold selected text
+          editor.current.toggleMark('bold');
+        }}
+      >
+        Bold
+      </button>
+      <button
+        onMouseDown={(e)=> {
+          e.preventDefault();
+          // italicize selected text
+          editor.current.toggleMark('italic');
+        }}
+      >
+        Italic
+      </button>
     <Editor
       ref={editor}
       style={{
@@ -55,6 +76,17 @@ const SyncingEditor = ({ groupId }) => {
         minHeight: 150
       }}
       value={value}
+      renderMark={(props, _editor, next) => {
+        if (props.mark.type === 'bold') {
+          return <strong style={{
+            letterSpacing: 1,
+          }}>{props.children}</strong>
+        } else if (props.mark.type === 'italic') {
+          return <em>{props.children}</em>
+        }
+
+        return next();
+      }}
       onChange={opts => {
         setValue(opts.value);
 
@@ -81,6 +113,7 @@ const SyncingEditor = ({ groupId }) => {
         }
       }} 
     />
+    </>
   );
 };
 
